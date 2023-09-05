@@ -1,5 +1,6 @@
 import pandas as pd
-from sqlalchemy import create_engine, types
+from sqlalchemy import create_engine
+import sqlalchemy
 
 
 def load(path, tableName):

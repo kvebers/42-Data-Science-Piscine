@@ -19,8 +19,7 @@ def main():
     Files = os.listdir(path)
     TablesToAdd = [item for item in Files if checkCSV(item) is True]
     TableNames = extractTableNames(TablesToAdd)
-    # print(TableNames)
-    # print(TablesToAdd)
+    
     for index, item in enumerate(TablesToAdd):
         if (item == "item.csv"):
             newpath = path + TablesToAdd[index]

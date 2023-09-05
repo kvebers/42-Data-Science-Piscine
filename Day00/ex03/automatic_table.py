@@ -22,6 +22,7 @@ def main():
     print(TableNames)
     for index, item in enumerate(TablesToAdd):
         newpath = path + TablesToAdd[index]
+        print(newpath, item)
         load(newpath, TableNames[index])
 
 
