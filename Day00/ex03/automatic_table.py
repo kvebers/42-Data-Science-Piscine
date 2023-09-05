@@ -1,4 +1,4 @@
-from lunch import load
+from table import load
 import os
 
 

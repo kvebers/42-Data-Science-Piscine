@@ -1,4 +1,4 @@
-from lunch import load
+from table import load
 import os
 
 
@@ -22,8 +22,9 @@ def main():
     # print(TableNames)
     # print(TablesToAdd)
     for index, item in enumerate(TablesToAdd):
-        newpath = path + TablesToAdd[index]
-        load(newpath, TableNames[index])
+        if (item == "item.csv"):
+            newpath = path + TablesToAdd[index]
+            load(newpath, TableNames[index])
 
 
 if __name__ == "__main__":
