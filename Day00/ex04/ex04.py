@@ -15,11 +15,12 @@ def checkCSV(item):
 
 
 def main():
-    path = "/goinfre/kvebers/subject/customer/"
+    path = "/goinfre/kvebers/subject/item/"
     Files = os.listdir(path)
     TablesToAdd = [item for item in Files if checkCSV(item) is True]
     TableNames = extractTableNames(TablesToAdd)
-    print(TableNames)
+    # print(TableNames)
+    # print(TablesToAdd)
     for index, item in enumerate(TablesToAdd):
         newpath = path + TablesToAdd[index]
         load(newpath, TableNames[index])
