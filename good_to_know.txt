@@ -1,0 +1,15 @@
+    Gives the lines of the database
+SELECT COUNT(*) FROM [table name]
+
+
+Creates the table if the table does not exist
+CREATE TABLE IF NOT EXISTS [table name]
+
+
+Selects all the collums in the specified table
+SELECT event_time, event_type, product_id, price, user_id, user_session FROM data_2022_oct
+
+
+Merges together the tables
+INSERT INTO [table name]
+UNION ALL
