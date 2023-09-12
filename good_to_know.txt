@@ -13,3 +13,8 @@ SELECT event_time, event_type, product_id, price, user_id, user_session FROM dat
 Merges together the tables
 INSERT INTO [table name]
 UNION ALL
+
+
+Creates an Alias for the placeholder values
+AS
+

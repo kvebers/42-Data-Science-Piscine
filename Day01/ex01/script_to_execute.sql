@@ -18,5 +18,4 @@ INSERT INTO customers (event_time, event_type, product_id, price, user_id, user_
     SELECT event_time, event_type, product_id, price, user_id, user_session FROM data_2023_feb
     UNION ALL
     SELECT event_time, event_type, product_id, price, user_id, user_session FROM data_2023_jan
-    UNION ALL
 );
