@@ -1,8 +1,0 @@
-psql -U kvebers -d piscineds -h localhost -W
-email:fake@sfudge.com
-password: 1
-
-The location to acces the file is:
-
-
-dockerMan -> Databases -> piscineds -> schemas ->tables -> your data table

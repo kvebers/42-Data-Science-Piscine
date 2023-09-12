@@ -1,4 +1,0 @@
-psql -U kvebers -d piscineds -h localhost -W
-email:fake@sfudge.com
-password: 1
-mysecretpassword
