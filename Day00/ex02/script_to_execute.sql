@@ -1,4 +1,4 @@
-CREATE TABLE data_2022_oct (
+CREATE TABLE IF NOT EXISTS data_2022_oct (
     event_time TIMESTAMP,
     event_type VARCHAR(255),
     product_id INT,

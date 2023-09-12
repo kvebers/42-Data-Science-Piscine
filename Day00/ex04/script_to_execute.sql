@@ -1,4 +1,4 @@
-CREATE TABLE items (
+CREATE TABLE IF NOT EXISTS items (
     product_id INT,
     category_id BIGINT,
     category_code VARCHAR(255),
