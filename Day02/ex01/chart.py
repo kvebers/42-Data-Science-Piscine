@@ -1,6 +1,7 @@
 import psycopg2
 import matplotlib.pyplot as plt
-import numpy as np
+import matplotlib.dates as mdates
+from datetime import date
 
 
 def main():
@@ -16,13 +17,45 @@ def main():
         connection.commit()
         cursor.close()
         connection.close()
-        labels = []
-        numbers = []
-        for i in data:
-            labels.append(i[0])
-            numbers.append(float(i[1]))
-        plt.pie(numbers, labels=labels, autopct='%1.1f%%')
-        plt.axis('equal')
+        # Declearing the subplots
+        fig, axs = plt.subplots(1, 3, figsize=(16, 4))
+        time = {}
+        time1 = {}
+        # Setting up the data to work with 1st table
+        for item in data:
+            month = item[0].month
+            if month > 9 or month < 2:
+                if (item[1] == "purchase"):
+                    dateKey = item[0].date()
+                    monthKey = item[0].month
+                    if dateKey not in time:
+                        time[dateKey] = 1
+                    else:
+                        time[dateKey] += 1
+                    if monthKey not in time1:
+                        time1[monthKey] = float(item[2])
+                    else:
+                        time1[monthKey] += float(item[2])
+        # First plot
+        sortedTime = sorted(time.items())
+        breakpointIdx = next(i for i, (d, _) in enumerate(sortedTime) if d.month == 1)
+        sortedTime.insert(breakpointIdx, (date(sortedTime[breakpointIdx-1][0].year, 12, 31), float('nan')))
+        sortedTime.insert(breakpointIdx+1, (date(sortedTime[breakpointIdx][0].year, 1, 1), float('nan')))
+        dates, counts = zip(*sortedTime)
+        axs[0].plot(dates, counts, color='b')
+        months = mdates.MonthLocator(bymonth=[10, 11, 12, 1])
+        month_fmt = mdates.DateFormatter('%b')
+        axs[0].xaxis.set_major_locator(months)
+        axs[0].xaxis.set_major_formatter(month_fmt)
+        axs[0].set_ylabel('Number of customers')
+        #2nd plot
+        months = ['Oct', 'Nov', 'Dec', 'Jan']
+        mils = 1000000
+        values = [time1.get(10, 0) / mils, time1.get(11, 0) / mils, time1.get(12, 0) / mils, time1.get(1, 0) / mils]
+        axs[1].bar(months, values)
+        axs[1].set_ylabel('Total sales in Millions of Hichiker currency')
+        # Displaying all plots
+        plt.tight_layout()
         plt.show()
     except Exception as error:
         print(f"Error: {error}")
