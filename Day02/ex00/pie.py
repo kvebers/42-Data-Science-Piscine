@@ -21,7 +21,8 @@ def main():
         for i in data:
             labels.append(i[0])
             numbers.append(float(i[1]))
-        plt.pie(numbers, labels=labels, autopct='%1.1f%%')
+        plt.pie(numbers, labels=labels, autopct='%1.1f%%',
+                wedgeprops=dict(width=0.3, edgecolor='white'))
         plt.axis('equal')
         plt.show()
     except Exception as error:

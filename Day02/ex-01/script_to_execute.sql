@@ -85,20 +85,3 @@ INSERT INTO customers (event_time, event_type, product_id, price, user_id, user_
     UNION ALL
     SELECT event_time, event_type, product_id, price, user_id, user_session FROM data_2023_jan
 );
-
-CREATE TEMPORARY TABLE temp AS SELECT DISTINCT * FROM customers;
-TRUNCATE customers;
-INSERT INTO customers SELECT * FROM temp;
-
-ALTER TABLE customers
-ADD COLUMN category_id BIGINT,
-ADD COLUMN category_code VARCHAR(255),
-ADD COLUMN brand VARCHAR(255);
-
-UPDATE customers c
-SET 
-    category_id = i.category_id,
-    category_code = i.category_code,
-    brand = i.brand
-FROM items i
-WHERE c.product_id = i.product_id;
