@@ -45,10 +45,7 @@ def main():
         for Val, values in time2.items():
             time3[Val] = values["sum"] / len(values["users"])
         # First plot
-        sortedTime = sorted(time.items())
-        breakpointIdx = next(i for i, (d, _) in enumerate(sortedTime) if d.month == 1)
-        sortedTime.insert(breakpointIdx, (date(sortedTime[breakpointIdx-1][0].year, 12, 31), float('nan')))
-        sortedTime.insert(breakpointIdx+1, (date(sortedTime[breakpointIdx][0].year, 1, 1), float('nan')))
+        sortedTime = sorted(time.items(), key=lambda x: x[0])
         dates, counts = zip(*sortedTime)
         axs[0].plot(dates, counts, color='b')
         months = mdates.MonthLocator(bymonth=[10, 11, 12, 1])
@@ -63,12 +60,9 @@ def main():
         axs[1].bar(months, values)
         axs[1].set_ylabel('Total sales in Millions of Hichiker currency')
         # 3d plot
-        sortedTime = sorted(time3.items())
-        breakpointIdx = next(i for i, (d, _) in enumerate(sortedTime) if d.month == 1)
-        sortedTime.insert(breakpointIdx, (date(sortedTime[breakpointIdx-1][0].year, 12, 31), float('nan')))
-        sortedTime.insert(breakpointIdx+1, (date(sortedTime[breakpointIdx][0].year, 1, 1), float('nan')))
+        sortedTime = sorted(time3.items(), key=lambda x: x[0])
         dates, counts = zip(*sortedTime)
-        axs[2].set_ylim(0, 60)        # Set the y-axis limits
+        axs[2].set_ylim(0, 60)
         axs[2].set_yticks(range(0, 61, 5)) 
         axs[2].plot(dates, counts, color='b')
         axs[2].fill_between(dates, counts, color='b', alpha=0.2)
@@ -77,7 +71,8 @@ def main():
         axs[2].xaxis.set_major_locator(months)
         axs[2].xaxis.set_major_formatter(month_fmt)
         axs[2].set_ylabel('Average value per customer')
-        # Displaying all plots
+
+        # Displaying graphs
         plt.tight_layout()
         plt.show()
     except Exception as error:
